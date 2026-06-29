@@ -9,8 +9,12 @@ module.exports = async function (message) {
   const bdate = message.content.slice(6).trim();
   const userid = message.author.id;
 
-  const updated = await notion.updateEntry(userid, bdate);
-  if (!updated) await notion.createEntry(userid, bdate);
-  message.react("👍");
-  //for ts we will use this emoji :ts:
+  try {
+    const updated = await notion.updateEntry(userid, bdate);
+    if (!updated) await notion.createEntry(userid, bdate);
+    message.react("👍");
+    //for ts we will use this emoji :ts:
+  } catch (err) {
+    message.react("👎");
+  }
 };
