@@ -31,8 +31,11 @@ async function getEntries() {
   const result = await notion.databases.query({
     database_id: process.env.NOTION_DATA_SOURCE_ID,
   });
-  return result.results;
-  // why is it result.results, mujhe nahi pta
+
+  return result.results.map((entry) => ({
+    discordId: entry.properties.discordid.title[0].plain_text,
+    bdate: entry.properties.bdate.rich_text[0].plain_text,
+  }));
 }
 
 async function updateEntry(discordId, bdate) {

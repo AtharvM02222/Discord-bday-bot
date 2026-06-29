@@ -5,6 +5,7 @@ TOKEN=
 NOTION_API=
 NOTION_DB=
 NOTION_DATA_SOURCE_ID=
+ANNOUNCE_CHANNEL_ID=
 ```
 
 fir we need what we need

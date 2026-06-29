@@ -18,7 +18,7 @@ bot.once("ready", () => {
 });
 
 bot.on("messageCreate", birthday);
-//cron.schedule("0 9 * * *", () => announce(bot), { timezone: "Asia/Kolkata" });
+cron.schedule("0 9 * * *", () => announce(bot), { timezone: "Asia/Kolkata" });
 
 bot.login(process.env.TOKEN);
 
