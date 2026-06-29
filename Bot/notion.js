@@ -4,3 +4,10 @@ const { Client } = require("@notionhq/client");
 const notion = new Client({
   auth: process.env.NOTION_API,
 });
+
+/*
+(async () => {
+  const result = await notion.databases.retrieve({ database_id: "38efc2bedce480b98d4efb603e92b8ef" });
+  console.log(result.data_sources);
+})();
+*/
