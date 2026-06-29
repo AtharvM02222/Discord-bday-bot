@@ -11,4 +11,5 @@ module.exports = async function (message) {
 
   await notion.createEntry(userid, bdate);
   message.react("👍");
+  //for ts we will use this emoji :ts:
 };
