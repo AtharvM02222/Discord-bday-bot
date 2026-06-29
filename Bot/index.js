@@ -21,17 +21,23 @@ bot.on("messageCreate", birthday);
 cron.schedule("0 9 * * *", () => announce(bot), { timezone: "Asia/Kolkata" });
 
 //testing
-bot.on("messageCreate", (message) => {
-  if (message.content === "!announce") announce(bot);
+bot.on("messageCreate", async (message) => {
+  if (message.content !== "!announce") return;
+  try {
+    await announce(bot);
+    message.react("1468579576895766578");
+  } catch (galat_bat) {
+    console.error(galat_bat);
+    message.react("👎");
+  }
 });
 
 bot.on("messageCreate", (message) => {
   if (message.author.bot) return;
   if (message.content === "ping") {
     message.reply("pong");
-    message.react("👍");
+    message.react("1468579576895766578");
   }
 });
-
 
 bot.login(process.env.TOKEN);
