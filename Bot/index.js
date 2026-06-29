@@ -16,6 +16,7 @@ bot.once("ready", () => {
   console.log(`Logged in as ${bot.user.tag}`);
 });
 
+/*
 bot.on("messageCreate", (message) => {
   if (message.author.bot) return;
   if (message.content === "ping") {
@@ -23,6 +24,7 @@ bot.on("messageCreate", (message) => {
     message.react("👍");
   }
 });
+*/
 
 bot.on("messageCreate", birthday);
 
