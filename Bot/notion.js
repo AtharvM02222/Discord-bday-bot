@@ -1,6 +1,8 @@
 require("dotenv").config();
 const { Client } = require("@notionhq/client");
+
 //https://ripe-jackfruit-476.notion.site/38efc2bedce480b98d4efb603e92b8ef?v=38efc2bedce48083955d000cd261178f&source=copy_link
+
 const notion = new Client({
   auth: process.env.NOTION_API,
 });
@@ -11,3 +13,18 @@ const notion = new Client({
   console.log(result.data_sources);
 })();
 */
+
+async function createEntry(discordId, bdate) {
+  await notion.pages.create({
+    parent: {
+      type: "data_source_id",
+      data_source_id: process.env.NOTION_DATA_SOURCE_ID,
+    },
+    properties: {
+      discordid: { title: [{ text: { content: discordId } }] },
+      bdate: { rich_text: [{ text: { content: bdate } }] },
+    },
+  });
+}
+
+module.exports = { createEntry };
