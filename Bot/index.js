@@ -22,7 +22,6 @@ bot.on("messageCreate", birthday);
 
 bot.login(process.env.TOKEN);
 
-/*
 bot.on("messageCreate", (message) => {
   if (message.author.bot) return;
   if (message.content === "ping") {
@@ -30,4 +29,3 @@ bot.on("messageCreate", (message) => {
     message.react("👍");
   }
 });
-*/
