@@ -20,7 +20,10 @@ bot.once("ready", () => {
 bot.on("messageCreate", birthday);
 cron.schedule("0 9 * * *", () => announce(bot), { timezone: "Asia/Kolkata" });
 
-bot.login(process.env.TOKEN);
+//testing
+bot.on("messageCreate", (message) => {
+  if (message.content === "!announce") announce(bot);
+});
 
 bot.on("messageCreate", (message) => {
   if (message.author.bot) return;
@@ -29,3 +32,6 @@ bot.on("messageCreate", (message) => {
     message.react("👍");
   }
 });
+
+
+bot.login(process.env.TOKEN);
