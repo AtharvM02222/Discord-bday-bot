@@ -1,14 +1,29 @@
-import { Client, GatewayIntentBits } from "discord.js";
-import dotenv from "dotenv";
+require("dotenv").config();
 
-dotenv.config();
+const { Client, GatewayIntentBits } = require("discord.js");
 
-const client = new Client({
-  intents: [GatewayIntentBits.Guilds],
+const birthday = require("./birthday");
+
+const bot = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
-client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}`);
+bot.once("ready", () => {
+  console.log(`Logged in as ${bot.user.tag}`);
 });
 
-client.login(process.env.TOKEN);
+bot.on("messageCreate", (message) => {
+  if (message.author.bot) return;
+  if (message.content === "ping") {
+    message.reply("pong");
+    message.react("👍");
+  }
+});
+
+bot.on("messageCreate", birthday);
+
+bot.login(process.env.TOKEN);
