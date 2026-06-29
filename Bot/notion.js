@@ -39,9 +39,21 @@ async function getEntries() {
 }
 
 async function updateEntry(discordId, bdate) {
-  //kya karu should we delete and then create a new entry
-  // or should we update the existing entry from checking the userid
-  return pass;
+  const result = await notion.databases.query({
+    database_id: process.env.NOTION_DATA_SOURCE_ID,
+    filter: { property: "discordid", title: { equals: discordId } },
+  });
+
+  if (result.results.length === 0) return false;
+
+  await notion.pages.update({
+    page_id: result.results[0].id,
+    properties: {
+      bdate: { rich_text: [{ text: { content: bdate } }] },
+    },
+  });
+
+  return true;
 }
 
 module.exports = { createEntry, getEntries, updateEntry };
