@@ -14,7 +14,8 @@ module.exports = async function (message) {
     if (!updated) await notion.createEntry(userid, bdate);
     message.react("👍");
     //for ts we will use this emoji :ts:
-  } catch (err) {
+  } catch (galat_bat) {
+    console.error(galat_bat);
     message.react("👎");
   }
 };
