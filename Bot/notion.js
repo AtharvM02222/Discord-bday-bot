@@ -27,4 +27,18 @@ async function createEntry(discordId, bdate) {
   });
 }
 
-module.exports = { createEntry };
+async function getEntries() {
+  const result = await notion.databases.query({
+    database_id: process.env.NOTION_DATA_SOURCE_ID,
+  });
+  return result.results;
+  // why is it result.results, mujhe nahi pta
+}
+
+async function updateEntry(discordId, bdate) {
+  //kya karu should we delete and then create a new entry
+  // or should we update the existing entry from checking the userid
+  return pass;
+}
+
+module.exports = { createEntry, getEntries, updateEntry };

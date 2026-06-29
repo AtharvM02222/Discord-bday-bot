@@ -1,8 +1,9 @@
 require("dotenv").config();
 
 const { Client, GatewayIntentBits } = require("discord.js");
-
 const birthday = require("./birthday");
+const cron = require("node-cron");
+const announce = require("./announce");
 
 const bot = new Client({
   intents: [
@@ -16,6 +17,11 @@ bot.once("ready", () => {
   console.log(`Logged in as ${bot.user.tag}`);
 });
 
+bot.on("messageCreate", birthday);
+cron.schedule("0 9 * * *", () => announce(bot), { timezone: "Asia/Kolkata" });
+
+bot.login(process.env.TOKEN);
+
 /*
 bot.on("messageCreate", (message) => {
   if (message.author.bot) return;
@@ -25,7 +31,3 @@ bot.on("messageCreate", (message) => {
   }
 });
 */
-
-bot.on("messageCreate", birthday);
-
-bot.login(process.env.TOKEN);
