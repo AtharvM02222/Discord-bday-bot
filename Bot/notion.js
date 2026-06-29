@@ -28,8 +28,8 @@ async function createEntry(discordId, bdate) {
 }
 
 async function getEntries() {
-  const result = await notion.databases.query({
-    database_id: process.env.NOTION_DATA_SOURCE_ID,
+  const result = await notion.dataSources.query({
+    data_source_id: process.env.NOTION_DATA_SOURCE_ID,
   });
 
   return result.results.map((entry) => ({
@@ -39,8 +39,8 @@ async function getEntries() {
 }
 
 async function updateEntry(discordId, bdate) {
-  const result = await notion.databases.query({
-    database_id: process.env.NOTION_DATA_SOURCE_ID,
+  const result = await notion.dataSources.query({
+    data_source_id: process.env.NOTION_DATA_SOURCE_ID,
     filter: { property: "discordid", title: { equals: discordId } },
   });
 
